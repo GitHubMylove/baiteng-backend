@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="Max_History" value="3" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder>
+            <!--<pattern>[%date{yyyy-MM-dd HH:mm:ss.S}] [%thread] [%-5level] %logger{80}  %msg%n</pattern>-->
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss.S}] [%-5level] %logger{80}  %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/baiteng-backend.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/baiteng-backend.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${Max_History}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<pattern>[%date{yyyy-MM-dd HH:mm:ss.S}] [%thread] [%-5level] %logger{80}  %msg%n</pattern>-->
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss.S}] [%-5level] %logger{80}  %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <File>log/error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>log/error.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>5</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>50MB</MaxFileSize>
+        </triggeringPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--<pattern>[%date{yyyy-MM-dd HH:mm:ss.S}] [%thread] [%-5level] %logger{80}  %msg%n</pattern>-->
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss.S}] [%-5level] %logger{80}  %msg%n</pattern>
+        </layout>
+    </appender>
+    <logger name="org.apache.kafka" level="INFO"/>
+    <logger name="io.netty" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="com.datastax" level="INFO"/>
+    <logger name="springfox" level="INFO"/>
+
+    <root>
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="error"/>
+    </root>
+
+</configuration>
