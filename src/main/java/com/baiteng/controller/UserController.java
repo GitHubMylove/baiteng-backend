@@ -1,5 +1,7 @@
 package com.baiteng.controller;
 
+import com.baiteng.base.Result;
+import com.baiteng.bean.RetResult;
 import com.baiteng.bean.SysUser;
 import com.baiteng.service.SysUserService;
 import com.baiteng.util.GsonUtils;
@@ -29,14 +31,15 @@ public class UserController {
             @ApiImplicitParam(paramType="query", name = "userName", value = " ", required = true, dataType = "String",defaultValue="佰腾")
     })
     @PostMapping("/addUser")
-    public String addUser(@RequestParam String userId,
-                            @RequestParam String userName
+    public Result<?> addUser(@RequestParam String userId,
+                             @RequestParam String userName
     ){
         SysUser sysUser=new SysUser();
         sysUser.setUserid(userId);
         sysUser.setUsername(userName);
         sysUserService.insert(sysUser);
         sysUser=sysUserService.selectByPrimaryKey(userId);
-        return GsonUtils.getJsonFromObject(sysUser);
+        return Result.newResult(sysUser);
     }
+
 }

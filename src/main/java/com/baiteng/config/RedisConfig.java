@@ -52,8 +52,8 @@ public class RedisConfig {
         redisTemplate.setHashKeySerializer(redisSerializer);
         //设置序列化Value的实例化对象
         redisTemplate.setValueSerializer(redisSerializer);
-
-        redisTemplate.setValueSerializer(redisSerializer);
+        // 与上一行代码重复，注释掉
+       // redisTemplate.setValueSerializer(redisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
