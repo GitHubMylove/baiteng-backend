@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baiteng.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.baiteng.bean.UserInfo" >
+    <constructor >
+      <idArg column="userId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="iconURL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="nickName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mobileNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="city" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="isVIP" jdbcType="BOOLEAN" javaType="java.lang.Boolean" />
+      <arg column="vipEndDate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="status" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="registeDate" jdbcType="VARCHAR" javaType="java.sql.Timestamp" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId,
+    iconURL,
+    nickName,
+    mobileNo,
+    city,
+    address,
+    email,
+    isVIP,
+    vipEndDate,
+    status,
+    registeDate
+  </sql>
+  <select id="selectUserInfoByMobile" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select 
+    count(0)
+    from UserInfo
+    where mobileNo = #{mobileNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,9 +1,10 @@
 package com.baiteng.base;
 
+import com.baiteng.common.Constants;
 import com.baiteng.util.GsonUtils;
 
 /**
- **  @Author: gaozhijun
+ **  @Author: John007
  **  @Company:
  **  @Date: 2019/8/18 11:50
  **  @Description:
@@ -15,12 +16,12 @@ public class DefaultResult<T> extends Result {
     private String data;
 
     public DefaultResult() {
-        this.code = "2000";
+        this.code = Constants.CODE_SUCCESS;
     }
 
     public DefaultResult(T payload) {
-        this.code= "2000";
-        this.message = "处理成功";
+        this.code= Constants.CODE_SUCCESS;
+        this.message = Constants.MESSAGE_DEAL_SUCCESS;
         this.data = GsonUtils.getJsonFromObject(payload);
     }
 
