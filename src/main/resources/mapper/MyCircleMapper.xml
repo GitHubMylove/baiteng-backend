@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baiteng.dao.MyCircleMapper" >
+  <resultMap id="BaseResultMap" type="com.baiteng.bean.MyCircle" >
+    <constructor >
+      <idArg column="circleId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="serialNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="betterySn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="modalId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="modal" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fromType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="shopName" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="buyDate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="bindDate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="isMine" jdbcType="BOOLEAN" javaType="java.lang.Boolean" />
+      <arg column="owner" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="picURL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="use" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="lastMaintenance" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="nextMaintenance" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="csVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    circleId,
+    serialNo,
+    betterySn,
+    modalId,
+    modal,
+    fromType,
+    shopName,
+    buyDate,
+    bindDate,
+    isMine,
+    owner,
+    picURL,
+    use,
+    lastMaintenance,
+    nextMaintenance,
+    csVersion,
+    status
+  </sql>
+  <select id="selectCirCleBySerialNo" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select
+    count(0)
+    from MyCircle
+    where serialNo = #{serialNo,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectSerialNoByMobileNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    a.*
+    from MyCircle a
+    left join FamilyNumber b on a.circleId = b.familyNumberId
+    where b.mobileNo = #{mobileNo,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

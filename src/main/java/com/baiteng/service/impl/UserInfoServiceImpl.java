@@ -1,5 +1,6 @@
 package com.baiteng.service.impl;
 
+import com.baiteng.bean.UserInfo;
 import com.baiteng.dao.UserInfoMapper;
 import com.baiteng.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public int selectUserInfoByMobile(String mobileNo) {
         return userInfoMapper.selectUserInfoByMobile(mobileNo);
+    }
+
+    @Override
+    public void addUserInfo(UserInfo userInfo) {
+        userInfoMapper.addUserInfo(userInfo);
     }
 }

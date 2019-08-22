@@ -1,4 +1,7 @@
 package com.baiteng.service;
+
+import com.baiteng.bean.UserInfo;
+
 /**
  * @author ：John007
  * @date ：Created in 2019/8/20 17:43
@@ -8,5 +11,9 @@ package com.baiteng.service;
  */
 public interface UserInfoService {
 
-    int selectUserInfoByMobile(String mobileNo);
+    /** 手机号查用户*/
+    int selectUserInfoByMobile (String mobileNo);
+
+    /** 添加用户*/
+    void addUserInfo(UserInfo userInfo);
 }

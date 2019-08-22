@@ -13,7 +13,7 @@
       <arg column="isVIP" jdbcType="BOOLEAN" javaType="java.lang.Boolean" />
       <arg column="vipEndDate" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="status" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="registeDate" jdbcType="VARCHAR" javaType="java.sql.Timestamp" />
+      <arg column="registeDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -29,10 +29,17 @@
     status,
     registeDate
   </sql>
+
   <select id="selectUserInfoByMobile" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select 
     count(0)
     from UserInfo
     where mobileNo = #{mobileNo,jdbcType=VARCHAR}
   </select>
+
+  <insert id="addUserInfo" parameterType="com.baiteng.bean.UserInfo">
+    insert into UserInfo (userId, mobileNo, status, registeDate)
+    values (#{userId,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR},
+    #{status, jdbcType=CHAR}, #{registeDate, jdbcType=TIMESTAMP} )
+  </insert>
 </mapper>

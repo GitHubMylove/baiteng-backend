@@ -10,16 +10,27 @@ import javax.persistence.GeneratedValue;
 public class UserInfo {
     @Id
     @GeneratedValue
+    /** 用户ID*/
     private String userId;
+    /** 头像*/
     private String iconURL;
+    /** 称呼*/
     private String nickName;
+    /** 手机号*/
     private String mobileNo;
+    /** 所在城市*/
     private String city;
+    /** 地址*/
     private String address;
+    /** 邮件地址*/
     private String email;
+    /** 是否会员： True, False 是否冲值*/
     private Boolean isVIP;
+    /** 有效期*/
     private Date vipEndDate;
+    /** 0 有效 (暂时不用，预留，永远为0)*/
     private String status;
+    /** 添加时间*/
     private Timestamp registeDate;
 
     public UserInfo() {

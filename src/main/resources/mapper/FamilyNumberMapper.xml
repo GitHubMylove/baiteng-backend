@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baiteng.dao.FamilyNumberMapper" >
+  <resultMap id="BaseResultMap" type="com.baiteng.bean.FamilyNumber" >
+    <constructor >
+      <idArg column="familyNumberId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="iconURL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="nickName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mobileNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="addedDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+      <arg column="removeDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    familyNumberId,
+    iconURL,
+    nickName,
+    mobileNo,
+    status,
+    addedDate,
+    removeDate
+  </sql>
+
+</mapper>
