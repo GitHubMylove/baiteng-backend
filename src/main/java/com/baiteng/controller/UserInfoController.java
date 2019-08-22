@@ -69,10 +69,10 @@ public class UserInfoController {
         Assert.isTrue("123456".equals(verifyCode), ErrorCodes.VERIFY_CODE_NOT_CORRECT, Constants.MESSAGE_VERIFY_CODE_NOT_CORRECT);
         /**如果车架号上送*/
         if (StringUtils.isNotEmpty(serialNo)) {
-            /** 车架号已注册*/
-            Assert.isTrue(0 != myCircleService.selectCirCleBySerialNo(serialNo), ErrorCodes.SERIAL_NO_IS_REGISTERED, Constants.MESSAGE_SERIAL_NO_IS_REGISTERED);
             /** 校验车架号不存在*/
-            Assert.isTrue(null != myCircleService.selectSerialNoByMobileNo(mobileNo), ErrorCodes.SERIAL_NO_NOT_EXIST, Constants.MESSAGE_SERIAL_NO_IS_NO_EXIST);
+            Assert.isTrue(0 != myCircleService.selectCirCleBySerialNo(serialNo), ErrorCodes.SERIAL_NO_IS_REGISTERED, Constants.MESSAGE_SERIAL_NO_IS_NO_EXIST);
+            /** 车架号已注册*/
+            Assert.isTrue(null != myCircleService.selectSerialNoByMobileNo(mobileNo), ErrorCodes.SERIAL_NO_NOT_EXIST, Constants.MESSAGE_SERIAL_NO_IS_REGISTERED);
         }
         /** 注册用户信息新增*/
         UserInfo userInfo = new UserInfo();
