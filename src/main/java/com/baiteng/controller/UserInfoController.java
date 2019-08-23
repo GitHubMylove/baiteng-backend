@@ -70,9 +70,9 @@ public class UserInfoController {
         /**如果车架号上送*/
         if (StringUtils.isNotEmpty(serialNo)) {
             /** 校验车架号不存在*/
-            Assert.isTrue(0 != myCircleService.selectCirCleBySerialNo(serialNo), ErrorCodes.SERIAL_NO_IS_REGISTERED, Constants.MESSAGE_SERIAL_NO_IS_NO_EXIST);
+            Assert.isTrue(0 != myCircleService.selectCirCleBySerialNo(serialNo), ErrorCodes.SERIAL_NO_NOT_EXIST, Constants.MESSAGE_SERIAL_NO_IS_NO_EXIST);
             /** 车架号已注册*/
-            Assert.isTrue(null != myCircleService.selectSerialNoByMobileNo(mobileNo), ErrorCodes.SERIAL_NO_NOT_EXIST, Constants.MESSAGE_SERIAL_NO_IS_REGISTERED);
+            Assert.isTrue(null != myCircleService.selectSerialNoByMobileNo(mobileNo), ErrorCodes.SERIAL_NO_IS_REGISTERED, Constants.MESSAGE_SERIAL_NO_IS_REGISTERED);
         }
         /** 注册用户信息新增*/
         UserInfo userInfo = new UserInfo();
@@ -85,5 +85,40 @@ public class UserInfoController {
         rspMap.put("tmpToken", tmpToken);
         return Result.newResult(rspMap);
     }
+
+    @ApiOperation(value = "设置密码", notes = "setPassword")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "tmpToken", value = " ", required = true, dataType = "String", defaultValue = "234141"),
+            @ApiImplicitParam(paramType = "query", name = "password", value = " ", required = true, dataType = "String", defaultValue = "123456")
+    })
+    @PostMapping("/api/user/setPassword")
+    private Result<?> setPassword(@RequestParam String tmpToken, @RequestParam String password){
+        Assert.isTrue(StringUtils.isNotEmpty(tmpToken), ErrorCodes.TMP_TOKEN_IS_NULL, Constants.MESSAGE_TMP_TOKEN_IS_NULL);
+        Assert.isTrue(StringUtils.isNotEmpty(password), ErrorCodes.PASSWORD_IS_NULL, Constants.MESSAGE_PASSWORD_IS_NULL);
+        return Result.newResult(Constants.CODE_SUCCESS, Constants.MESSAGE_DEAL_SUCCESS);
+    }
+
+    @ApiOperation(value = "用户登录", notes = "login")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "mobileNo", value = " ", required = true, dataType = "String", defaultValue = "13632757605"),
+            @ApiImplicitParam(paramType = "query", name = "password", value = " ", required = true, dataType = "String", defaultValue = "123456")
+    })
+    @PostMapping("/api/user/login")
+    private Result<?> login(@RequestParam String mobileNo, @RequestParam String password) {
+        Assert.isTrue(StringUtils.isNotEmpty(mobileNo), ErrorCodes.MOBILE_NO_IS_NULL, Constants.MESSAGE_MOBILE_IS_NULL);
+        Assert.isTrue(StrUtils.isMobile(mobileNo), ErrorCodes.ILLEGAL_FORMAT_OF_MOBILE_PHONE_NUMBE, Constants.MESSAGE_ILLEGAL_FORMAT_OF_MOBILE_PHONE_NUMBE);
+        Assert.isTrue(0 == userInfoService.selectUserInfoByMobile(mobileNo), ErrorCodes.MOBILE_NO_IS_NOT_EXIST, Constants.MESSAGE_MOBILE_NO_IS_NOT_EXIST);
+        Assert.isTrue("123456".equals(password), ErrorCodes.PASSWORD_NOT_CORRECT, Constants.MESSAGE_PASSWORD_NOT_CORRECT);
+        // TODO帐号已锁定??? 主要是考虑用户登录失败次数要不要限制
+        String token = IdGeneratorUtils.generateRandom();
+        Map<String, Object> rspMap = new HashMap<String, Object>();
+        rspMap.put("token", token);
+        return Result.newResult(rspMap);
+    }
+
+
+
+
+
 
 }

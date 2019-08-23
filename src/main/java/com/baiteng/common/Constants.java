@@ -28,6 +28,14 @@ public class Constants {
 
     public static final String MESSAGE_SERIAL_NO_IS_NO_EXIST = "车架号不存在";
 
+    public static final String MESSAGE_TMP_TOKEN_IS_NULL = "令牌为空";
+
+    public static final String MESSAGE_PASSWORD_IS_NULL = "密码为空";
+
+    public static final String MESSAGE_MOBILE_NO_IS_NOT_EXIST = " 手机号不存在";
+
+    public static final String MESSAGE_PASSWORD_NOT_CORRECT = "密码不正确";
+
     /** 交易常量定义**/
     public static final String STATUS_NORMAL = "0";
 
